@@ -239,6 +239,7 @@ body {
 
 .addtask__input {
   font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
   width: 100%;
   max-width: 450px;
   min-width: 225px;
@@ -247,7 +248,7 @@ body {
   background-color: rgba(0, 142, 216, 0.9);
   padding: 0 10px;
   color: #fff;
-  font-size: 16px;
+  font-size: 24px;
 }
 
 .addtask__input::-webkit-input-placeholder {
