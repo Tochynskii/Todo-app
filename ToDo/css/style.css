@@ -163,7 +163,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: "Caveat", cursive;
+  font-family: "Caveat", sans-serif;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   -ms-overflow-style: none;
@@ -176,7 +176,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-image: url(../img/bg.webp);
+  background-image: url(../img/bg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -466,3 +466,5 @@ body {
     font-size: 33px;
   }
 }
+
+.webp .wrapper{ background-image: url(../img/bg.webp); }
