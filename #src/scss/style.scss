@@ -93,7 +93,6 @@ body {
 	padding: 0px 10px;
 	&__input {
 		font-family: Arial, Helvetica, sans-serif;
-		text-decoration: none;
 		width: 100%;
 		max-width: 450px;
 		min-width: 225px;
@@ -103,6 +102,9 @@ body {
 		padding: 0 10px;
 		color: #fff;
 		font-size: 24px;
+		@media (max-width: 424px) {
+			font-size: 16px;
+		}
 		&::placeholder {
 			color: #fff;
 			text-align: center;
@@ -183,6 +185,7 @@ body {
 	}
 
 	&__text {
+		font-family: Arial, Helvetica, sans-serif;
 		width: 350px;
 		min-width: 350px;
 		word-wrap: break-word;

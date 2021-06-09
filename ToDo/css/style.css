@@ -239,7 +239,6 @@ body {
 
 .addtask__input {
   font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
   width: 100%;
   max-width: 450px;
   min-width: 225px;
@@ -358,6 +357,7 @@ body {
 }
 
 .todo-list__text {
+  font-family: Arial, Helvetica, sans-serif;
   width: 350px;
   min-width: 350px;
   word-wrap: break-word;
@@ -428,6 +428,10 @@ body {
 @media (max-width: 424px) {
   .todo__title {
     font-size: 43px;
+  }
+
+  .addtask__input {
+    font-size: 16px;
   }
 
   .addtask__input::-webkit-input-placeholder {
