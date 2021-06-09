@@ -1,0 +1,217 @@
+//mixin >=================================================================================
+@import "mixins.scss";
+//mixin >=================================================================================
+
+// ШРИФТИ>==================================================================================
+@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+// &display=swap // &subset=cyrillic-ext
+@import "fonts.scss";
+@import "icons.scss";
+// ШРИФТИ>==================================================================================
+
+// Підключення файлів стилів сторінок та елементів>=========================================
+@import "_header.scss";
+@import "_footer.scss";
+@import "ui.scss";
+@import "null.scss";
+// Підключення файлів стилів сторінок та елементів>=========================================
+
+// перемінні>===============================================================================
+$minwidth: 320px;
+$maxWidth: 1152px;
+$maxWidthContainer: 856px;
+
+// перемінні>===============================================================================
+
+// Загальні параметри>======================================================================
+html,
+body {
+	width: 100%;
+	height: 100%;
+	font-family: "Courgette", cursive;
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+	-ms-overflow-style: none; /* IE 10+ */
+	scrollbar-width: none; /* Firefox */
+}
+// Загальні параметри>======================================================================
+
+// Оболочка>================================================================================
+.wrapper {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-image: url(../img/bg.webp);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px 0;
+}
+// Оболочка>================================================================================
+
+// ОСНОВНА СІТКА>===========================================================================
+
+// ОСНОВНА СІТКА>===========================================================================
+
+// SECTION>=================================================================================
+.todo {
+	width: calc(100vw - 30px);
+	max-width: $maxWidthContainer;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgba(255, 255, 255, 0.7);
+	padding: 20px 15px 20px 15px;
+	&__title {
+		color: #3fa0f0e0;
+		font-size: 100px;
+		font-weight: 700;
+		text-shadow: 4px 3px 5px rgb(0, 142, 216);
+		@media (max-width: 768px) {
+			font-size: 60px;
+		}
+		@media (max-width: 424px) {
+			font-size: 45px;
+		}
+	}
+
+	&__addtask {
+	}
+}
+
+.addtask {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 20px 0;
+	padding: 0px 10px;
+	&__input {
+		width: 100%;
+		max-width: 450px;
+		min-width: 225px;
+		height: 50px;
+		border-radius: 25px;
+		background-color: rgba(0, 142, 216, 0.9);
+		padding: 0 10px;
+		color: #fff;
+		font-size: 16px;
+		&::placeholder {
+			color: #fff;
+			text-align: center;
+			font-size: 18px;
+			@media (max-width: 424px) {
+				font-size: 16px;
+			}
+		}
+		@media (max-width: 424px) {
+			min-width: 200px;
+			height: 40px;
+		}
+	}
+	&__add-btn {
+		display: flex;
+		justify-content: center;
+		min-width: 50px;
+		min-height: 50px;
+		border-radius: 25px;
+		font-size: 40px;
+		background-color: rgba(0, 142, 216, 0.9);
+
+		color: #fff;
+		margin: 0px 0px 0px 15px;
+		cursor: pointer;
+		transition: all 0.5s ease;
+		&:hover {
+			color: rgb(0, 142, 216);
+			background-color: #fff;
+		}
+		@media (max-width: 424px) {
+			min-height: 40px;
+			height: 40px;
+			min-width: 40px;
+			font-size: 33px;
+		}
+	}
+}
+
+// SECTION>=================================================================================
+
+.todo-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: 30%;
+	overflow: auto;
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0px 0px 20px 0px;
+	}
+
+	&__check {
+		border-radius: 5px;
+		background-color: #3fa0f0e0;
+		transition: background-color 0.4s ease;
+		width: 25px;
+		height: 25px;
+		@media (max-width: 430px) {
+			width: 20px;
+			height: 20px;
+		}
+		&.completed {
+			background: url(../img/19301342491536572528.svg) 3px 2px no-repeat;
+			background-size: 20px 20px;
+			background-color: rgb(3, 190, 134);
+			@media (max-width: 430px) {
+				background-size: 15px 15px;
+			}
+		}
+	}
+
+	&__text {
+		min-width: 350px;
+		max-width: 350px;
+		word-wrap: break-word;
+		border-bottom: 1px solid rgb(199, 198, 198);
+		padding: 0px 5px 0px 5px;
+		margin: 0px 5px 0px 5px;
+		font-size: 20px;
+		transition: all 0.4s ease;
+		@media (max-width: 430px) {
+			font-size: 16px;
+			min-width: 230px;
+			max-width: 230px;
+		}
+	}
+
+	&__btn-delete {
+		border-radius: 5px;
+		background-color: #3fa0f0e0;
+		transition: background-color 0.4s ease;
+		width: 25px;
+		height: 25px;
+		background-image: url(../img/trash.svg);
+		background-repeat: no-repeat;
+		background-size: 25px 25px;
+		@media (max-width: 430px) {
+			width: 20px;
+			height: 20px;
+			background-size: 20px 20px;
+		}
+		&:hover {
+			background-color: red;
+		}
+	}
+	.delete {
+		transition: all 0.3s ease;
+		transform: translateY(8rem) rotateZ(20deg);
+		opacity: 0;
+	}
+}
