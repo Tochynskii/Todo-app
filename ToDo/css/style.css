@@ -382,10 +382,6 @@ body {
   background-size: 25px 25px;
 }
 
-.todo-list__btn-delete:hover {
-  background-color: red;
-}
-
 .todo-list .delete {
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
@@ -394,6 +390,12 @@ body {
       -ms-transform: translateY(8rem) rotate(20deg);
           transform: translateY(8rem) rotateZ(20deg);
   opacity: 0;
+}
+
+@media (min-width: 1025px) {
+  .todo-list__btn-delete:hover {
+    background-color: red;
+  }
 }
 
 @media (max-width: 768px) {

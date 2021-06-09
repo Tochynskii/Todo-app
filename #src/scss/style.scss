@@ -213,9 +213,12 @@ body {
 			height: 20px;
 			background-size: 20px 20px;
 		}
-		&:hover {
-			background-color: red;
+		@media (min-width: 1025px) {
+			&:hover {
+				background-color: red;
+			}
 		}
+
 	}
 	.delete {
 		transition: all 0.3s ease;
