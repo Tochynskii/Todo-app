@@ -334,7 +334,6 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 60px;
   padding: 15px 10px;
   margin: 10px 0;
   border: 2px solid #008ed8;
@@ -360,7 +359,6 @@ body {
 .todo-list__text {
   font-family: Arial, Helvetica, sans-serif;
   width: 350px;
-  min-width: 350px;
   word-wrap: break-word;
   padding: 0px 5px 0px 5px;
   margin: 0px 5px 0px 5px;
