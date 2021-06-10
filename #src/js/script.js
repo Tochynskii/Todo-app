@@ -7,7 +7,51 @@ addBtn.addEventListener('click', addTask)
 todoList.addEventListener('click', deleteTodo)
 todoList.addEventListener('click', checked)
 document.addEventListener('DOMContentLoaded', getTodos)
+document.addEventListener('DOMContentLoaded', getTodosFromApi)
 
+function getTodosFromApi() {
+	return fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+		.then(response => response.json())
+		.then(data => {
+			if (Array.isArray(data)) {
+				data.map(item => {
+					createTodoFromApi(item.title, item.completed)
+				})
+			} else {
+				createTodoFromApi(data.title, data.completed)
+			}
+		}
+		)
+}
+
+const createTodoFromApi = (txt, checkValue) => {
+	const newTodo = document.createElement('li')
+	newTodo.classList.add('todo-list__item')
+	newTodo.classList.add('item-api')
+
+
+	const check = document.createElement('button')
+	check.classList.add('todo-list__check')
+	newTodo.appendChild(check)
+
+
+	const text = document.createElement('p')
+	text.classList.add('todo-list__text')
+	text.innerText = txt
+	newTodo.appendChild(text)
+
+	const delBtn = document.createElement('button')
+	delBtn.classList.add('todo-list__btn-delete')
+	newTodo.appendChild(delBtn)
+
+	todoList.appendChild(newTodo)
+	if (checkValue) {
+		check.classList.add('completed')
+		newTodo.style.borderColor = 'rgb(3, 190, 134)'
+		text.style.color = 'gray'
+		text.style.textDecoration = 'line-through'
+	}
+}
 
 function addTask(e) {
 	e.preventDefault()
@@ -16,10 +60,11 @@ function addTask(e) {
 		const newTodo = document.createElement('li')
 		newTodo.classList.add('todo-list__item')
 
+
 		const check = document.createElement('button')
 		check.classList.add('todo-list__check')
 		newTodo.appendChild(check)
-	
+
 		const text = document.createElement('p')
 		text.classList.add('todo-list__text')
 		text.innerText = todoText
@@ -40,18 +85,17 @@ function checked(e) {
 	const item = e.target
 	if (item.classList.contains('todo-list__check')) {
 		const todo = item.parentElement
-		console.log(todo.children[1])
-			item.classList.toggle('completed')
-			if (item.classList.contains('completed')) {
-				todo.style.borderColor = 'rgb(3, 190, 134)'
-				todo.children[1].style.textDecoration = 'line-through'
-				todo.children[1].style.color = 'gray'
-			} else {
-				todo.style.borderColor = 'rgb(0, 142, 216)'
-				todo.children[1].style.textDecoration = 'none'
-				todo.children[1].style.color = '#000'
-			}
-			toStorage()
+		item.classList.toggle('completed')
+		if (item.classList.contains('completed')) {
+			todo.style.borderColor = 'rgb(3, 190, 134)'
+			todo.children[1].style.textDecoration = 'line-through'
+			todo.children[1].style.color = 'gray'
+		} else {
+			todo.style.borderColor = 'rgb(0, 142, 216)'
+			todo.children[1].style.textDecoration = 'none'
+			todo.children[1].style.color = '#000'
+		}
+		toStorage()
 	}
 }
 
@@ -66,7 +110,9 @@ function deleteTodo(e) {
 				todo.remove()
 			}
 		}, 300)
-		removeLocalTodo(todo)
+		if (!todo.classList.contains('item-api')) {	
+			removeLocalTodo(todo)
+		}
 	}
 
 }
@@ -74,15 +120,16 @@ function deleteTodo(e) {
 function toStorage() {
 	const todosEl = document.querySelectorAll('li')
 	const todos = []
-	todosEl.forEach(todoEl => {
-
-		todos.push({
-			text: todoEl.innerText,
-			completed: todoEl.children[0].classList.contains('completed')
+		todosEl.forEach(todoEl => {
+			if (!todoEl.classList.contains('item-api')) {
+			todos.push({
+				text: todoEl.innerText,
+				completed: todoEl.children[0].classList.contains('completed')
+			})
+		}
 		})
-	})
-	localStorage.setItem('todos', JSON.stringify(todos))
-}
+		localStorage.setItem('todos', JSON.stringify(todos))
+	}
 
 
 function getTodos() {
@@ -99,7 +146,7 @@ function getTodos() {
 		const check = document.createElement('button')
 		check.classList.add('todo-list__check')
 		newTodo.appendChild(check)
-		
+
 		const text = document.createElement('p')
 		text.classList.add('todo-list__text')
 		text.innerText = todo.text
@@ -108,23 +155,14 @@ function getTodos() {
 		const delBtn = document.createElement('button')
 		delBtn.classList.add('todo-list__btn-delete')
 		newTodo.appendChild(delBtn)
-		delBtn.addEventListener('click', () => {
-			newTodo.classList.add('delete')
-			setTimeout(() => {
-				if (newTodo.classList.contains('delete')) {
-					newTodo.remove()
-				}
-			}, 300)
 
-		})
 		if (todo.completed) {
 			check.classList.add('completed')
 			newTodo.style.borderColor = 'rgb(3, 190, 134)'
 			text.style.color = 'gray'
 			text.style.textDecoration = 'line-through'
-		} 
+		}
 		todoList.appendChild(newTodo)
-
 	})
 }
 
