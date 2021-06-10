@@ -320,8 +320,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-width: 30%;
-  height: auto;
   overflow: auto;
 }
 
@@ -335,7 +333,6 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: auto;
   padding: 15px 10px;
   margin: 10px 0;
   border: 2px solid #008ed8;
@@ -343,6 +340,9 @@ body {
 }
 
 .todo-list__check {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   border-radius: 5px;
   background-color: #008ed8;
   -webkit-transition: background-color 0.4s ease;
@@ -359,6 +359,13 @@ body {
 }
 
 .todo-list__text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   width: 350px;
   word-wrap: break-word;
@@ -371,6 +378,9 @@ body {
 }
 
 .todo-list__btn-delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   border-radius: 5px;
   background-color: #3fa0f0e0;
   -webkit-transition: background-color 0.4s ease;
