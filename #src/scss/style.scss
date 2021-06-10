@@ -152,6 +152,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	min-width: 30%;
+	height: auto;
 	overflow: auto;
 	&__item {
 		display: flex;
