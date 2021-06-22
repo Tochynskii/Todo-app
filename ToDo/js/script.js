@@ -7,51 +7,57 @@ addBtn.addEventListener('click', addTask)
 todoList.addEventListener('click', deleteTodo)
 todoList.addEventListener('click', checked)
 document.addEventListener('DOMContentLoaded', getTodos)
-document.addEventListener('DOMContentLoaded', getTodosFromApi)
+// document.addEventListener('DOMContentLoaded', getTodosFromApi)
 
-function getTodosFromApi() {
-	return fetch('https://jsonplaceholder.typicode.com/users/1/todos')
-		.then(response => response.json())
-		.then(data => {
-			if (Array.isArray(data)) {
-				data.map(item => {
-					createTodoFromApi(item.title, item.completed)
-				})
-			} else {
-				createTodoFromApi(data.title, data.completed)
-			}
-		}
-		)
-}
+// function getTodosFromApi() {
+// 	return fetch('https://jsonplaceholder.typicode.com/users/1/todos')
+// 		.then(response => response.json())
+// 		.then(data => {
+// 			if (Array.isArray(data)) {
+// 				data.map(item => {
+// 					createTodoFromApi(item.title, item.completed)
+// 				})
+// 			} else {
+// 				createTodoFromApi(data.title, data.completed)
+// 			}
+// 		}
+// 		)
+// }
 
-const createTodoFromApi = (txt, checkValue) => {
-	const newTodo = document.createElement('li')
-	newTodo.classList.add('todo-list__item')
-	newTodo.classList.add('item-api')
-
-
-	const check = document.createElement('button')
-	check.classList.add('todo-list__check')
-	newTodo.appendChild(check)
+// const createTodoFromApi = (txt, checkValue) => {
+// 	const newTodo = document.createElement('li')
+// 	newTodo.classList.add('todo-list__item')
+// 	newTodo.classList.add('item-api')
 
 
-	const text = document.createElement('p')
-	text.classList.add('todo-list__text')
-	text.innerText = txt
-	newTodo.appendChild(text)
+// 	const check = document.createElement('button')
+// 	check.classList.add('todo-list__check')
+// 	newTodo.appendChild(check)
 
-	const delBtn = document.createElement('button')
-	delBtn.classList.add('todo-list__btn-delete')
-	newTodo.appendChild(delBtn)
 
-	todoList.appendChild(newTodo)
-	if (checkValue) {
-		check.classList.add('completed')
-		newTodo.style.borderColor = 'rgb(3, 190, 134)'
-		text.style.color = 'gray'
-		text.style.textDecoration = 'line-through'
-	}
-}
+// 	const text = document.createElement('p')
+// 	text.classList.add('todo-list__text')
+// 	text.innerText = txt
+// 	newTodo.appendChild(text)
+
+// 	const delBtn = document.createElement('button')
+// 	delBtn.classList.add('todo-list__btn-delete')
+// 	newTodo.appendChild(delBtn)
+	
+// 	const date = document.createElement('div')
+// 		date.classList.add('todo-list__date')
+// 		const time = new Date()
+// 		date.textContent = time.toLocaleTimeString()
+// 		newTodo.appendChild(date)
+
+// 	todoList.appendChild(newTodo)
+// 	if (checkValue) {
+// 		check.classList.add('completed')
+// 		newTodo.style.borderColor = 'rgb(3, 190, 134)'
+// 		text.style.color = 'gray'
+// 		text.style.textDecoration = 'line-through'
+// 	}
+// }
 
 function addTask(e) {
 	e.preventDefault()
@@ -73,6 +79,12 @@ function addTask(e) {
 		const delBtn = document.createElement('button')
 		delBtn.classList.add('todo-list__btn-delete')
 		newTodo.appendChild(delBtn)
+
+		const date = document.createElement('div')
+		date.classList.add('todo-list__date')
+		const time = new Date()
+		date.textContent = time.toLocaleTimeString()
+		newTodo.appendChild(date)
 
 		todoList.insertBefore(newTodo, todoList.firstChild)
 		taskInput.value = ''
@@ -99,7 +111,6 @@ function checked(e) {
 	}
 }
 
-
 function deleteTodo(e) {
 	const item = e.target
 	if (item.classList.contains('todo-list__btn-delete')) {
@@ -123,14 +134,14 @@ function toStorage() {
 		todosEl.forEach(todoEl => {
 			if (!todoEl.classList.contains('item-api')) {
 			todos.push({
-				text: todoEl.innerText,
+				text: todoEl.children[1].innerText,
+				date: todoEl.lastChild.innerText,
 				completed: todoEl.children[0].classList.contains('completed')
 			})
 		}
 		})
 		localStorage.setItem('todos', JSON.stringify(todos))
 	}
-
 
 function getTodos() {
 	let todos
@@ -156,6 +167,11 @@ function getTodos() {
 		delBtn.classList.add('todo-list__btn-delete')
 		newTodo.appendChild(delBtn)
 
+		const date = document.createElement('div')
+		date.classList.add('todo-list__date')
+		date.textContent = todo.date
+		newTodo.appendChild(date)
+
 		if (todo.completed) {
 			check.classList.add('completed')
 			newTodo.style.borderColor = 'rgb(3, 190, 134)'
@@ -165,7 +181,6 @@ function getTodos() {
 		todoList.appendChild(newTodo)
 	})
 }
-
 
 function removeLocalTodo(todo) {
 	let todos
@@ -177,6 +192,10 @@ function removeLocalTodo(todo) {
 	const arrTodo = todos.map(todo => todo.text)
 	todos.splice(arrTodo.indexOf(todo.children[1].innerText), 1)
 	localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function addTime() {
+
 }
 
 

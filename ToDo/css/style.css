@@ -333,10 +333,12 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 15px 10px;
+  padding: 8px;
   margin: 10px 0;
   border: 2px solid #008ed8;
   border-radius: 20px;
+  word-wrap: break-word;
+  height: auto;
 }
 
 .todo-list__check {
@@ -368,9 +370,7 @@ body {
           flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   width: 350px;
-  word-wrap: break-word;
-  padding: 0px 5px 0px 5px;
-  margin: 0px 5px 0px 5px;
+  padding: 0px 10px;
   font-size: 20px;
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
@@ -382,7 +382,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   border-radius: 5px;
-  background-color: #3fa0f0e0;
+  background-color: #008ed8;
   -webkit-transition: background-color 0.4s ease;
   -o-transition: background-color 0.4s ease;
   transition: background-color 0.4s ease;
@@ -391,6 +391,21 @@ body {
   background-image: url(../img/trash.svg);
   background-repeat: no-repeat;
   background-size: 25px 25px;
+}
+
+.todo-list__date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 16px;
+  color: #008ed8;
+  font-weight: bold;
+  width: 65px;
+  height: 25px;
+  margin: 0px 0px 0px 10px;
 }
 
 .todo-list .delete {
@@ -427,8 +442,7 @@ body {
 
   .todo-list__text {
     font-size: 16px;
-    min-width: 230px;
-    max-width: 230px;
+    width: 200px;
   }
 
   .todo-list__btn-delete {
